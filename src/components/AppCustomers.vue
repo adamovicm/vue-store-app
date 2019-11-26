@@ -22,6 +22,12 @@
           <td>{{ customer.lastName }}</td>
           <td>{{ customer.email }}</td>
           <td>
+            <router-link to="{{index}}/purchases" name="purchases">
+              <button class="btn btn-outline-primary">Latest Purchases</button>
+            </router-link to="{{index}}/purchases">
+  
+          </td>
+          <td>
             <button 
               class="btn btn-danger"
               @click.prevent="removeCustomer(index)">Remove</button></td>
@@ -48,7 +54,8 @@ export default {
         + customers[index].lastName + '?')) {
         customers.splice(index, 1);
       }
-    }
+    },
+    
   },
   components: {
     AppInsertCustomer
