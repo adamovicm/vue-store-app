@@ -2,6 +2,10 @@
   <div>
     <h1>Customers</h1>
 
+    <!-- <router-view name="insert-customer"></router-view> -->
+    <!-- <app-insert-customer /> -->
+    <app-insert-customer />
+
     <table class="table">
       <thead>
         <tr>
@@ -25,11 +29,12 @@
       </tbody>
     </table>
   </div>
-
 </template>
 
 <script>
 import { customers } from '../services/CustomerService.js';
+import AppInsertCustomer from '../components/AppInsertCustomer';
+
 export default {
   data() {
     return {
@@ -44,10 +49,9 @@ export default {
         customers.splice(index, 1);
       }
     }
+  },
+  components: {
+    AppInsertCustomer
   }
 }
 </script>
-
-<style>
-
-</style>
