@@ -1,11 +1,11 @@
 <template>
   <div>
     <h1>Customers</h1>
-
+    <br>
     <!-- <router-view name="insert-customer"></router-view> -->
     <!-- <app-insert-customer /> -->
-    <app-insert-customer />
-
+    <app-insert-customer :customers="customers"/>
+    <br>
     <table class="table">
       <thead>
         <tr>
@@ -22,10 +22,9 @@
           <td>{{ customer.lastName }}</td>
           <td>{{ customer.email }}</td>
           <td>
-            <router-link to="{{index}}/purchases" name="purchases">
+            <router-link :to="`/customers/${index}`" name="purchases">
               <button class="btn btn-outline-primary">Latest Purchases</button>
-            </router-link to="{{index}}/purchases">
-  
+            </router-link>
           </td>
           <td>
             <button 
@@ -38,24 +37,23 @@
 </template>
 
 <script>
-import { customers } from '../services/CustomerService.js';
+import CustomerService from '../services/CustomerService';
 import AppInsertCustomer from '../components/AppInsertCustomer';
 
 export default {
   data() {
     return {
-      customers
+      customers: (new CustomerService()).customers
     }
   },
   methods: {
     removeCustomer(index) {
       if(confirm('Really delete customer ' 
-        + customers[index].firstName + ' ' 
-        + customers[index].lastName + '?')) {
-        customers.splice(index, 1);
+        + this.customers[index].firstName + ' ' 
+        + this.customers[index].lastName + '?')) {
+        this.customers.splice(index, 1);
       }
     },
-    
   },
   components: {
     AppInsertCustomer

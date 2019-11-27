@@ -27,11 +27,12 @@
 </template>
 
 <script>
-import { customers } from '../services/CustomerService.js';
 export default {
+  props: [
+    'customers',
+  ],
   data() {
     return {
-      customers,
       customer: {
         id: '',
         firstName: '',
@@ -44,7 +45,14 @@ export default {
     saveCustomer() {
       let existingCustomer = this.customers.find(customer => customer.id == this.customer.id);
       if(!existingCustomer) {
+        // this.customers.push(JSON.parse(JSON.stringify(this.customer)));
         this.customers.push(this.customer);
+        this.customer = {
+          id: '',
+          firstName: '',
+          lastName: '',
+          email: ''
+        };
       }
     }
   }

@@ -7,11 +7,16 @@ export const routes = [
         path: '/customers',
         name: 'customers',
         component: AppCustomers,
-        children: [{
-            path: '/:id/purchases',
-            name: 'purchases',
-            component: AppLatestPurchases
-        }]
+        // children: [{
+        //     path: '/:id/purchases',
+        //     name: 'purchases',
+        //     component: AppLatestPurchases
+        // }]
+    },
+    {
+        path: '/customers/:id',
+        name: 'purchases',
+        component: AppLatestPurchases
     },
     {path: '/products', component: AppProducts}
 ]
