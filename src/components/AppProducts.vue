@@ -25,6 +25,8 @@
           <td>{{ product.id }}</td>
           <td>{{ product.title }}</td>
           <td>{{ product.quantity }}</td>
+          <td><button class="btn btn-outline-primary" @click="increment(product.id)">+</button></td>
+          <td><button class="btn btn-outline-danger" @click="decrement(product.id)">-</button></td>
         </tr>
       </tbody>
       <tbody v-else>
@@ -32,6 +34,8 @@
           <td>{{ product.id }}</td>
           <td>{{ product.title }}</td>
           <td>{{ product.quantity }}</td>
+          <td><button class="btn btn-outline-primary" @click="increment(product.id)">+</button></td>
+          <td><button class="btn btn-outline-danger" @click="decrement(product.id)">-</button></td>
         </tr>
       </tbody>
     </table>
@@ -41,6 +45,7 @@
 <script>
 import ProductService from '../services/ProductService';
 export default {
+  // props: ['products'],
   data() {
     return {
       products: (new ProductService).products,
@@ -53,6 +58,20 @@ export default {
       this.filteredProducts = this.products.filter(
           product => product.title.toLowerCase().indexOf(
             this.filterText.toLowerCase().trim()) !== -1);
+    },
+    increment(id) {
+      // let foundProductIndex = this.products.find(product => product.id == id);
+      // let index = this.products.indexOf(this.products.filter(product => product.id == id));
+      this.products.forEach(product => {
+        if (product.id == id) {
+          product.quantity ++;
+        }
+      })
+      // console.log(index);
+      // foundProduct.quantity ++;
+    },
+    decrement(id) {
+      console.log(id);
     }
   }
 }

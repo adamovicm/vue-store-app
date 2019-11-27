@@ -37,26 +37,33 @@
 </template>
 
 <script>
-import CustomerService from '../services/CustomerService';
+// import CustomerService from '../services/CustomerService';
 import AppInsertCustomer from '../components/AppInsertCustomer';
+import {mapGetters} from 'vuex';
 
 export default {
   data() {
     return {
-      customers: (new CustomerService()).customers
+      // customers: (new CustomerService()).customers
     }
+  },
+  computed: {
+    ...mapGetters({
+      customers: 'customers/customers'
+    }),
   },
   methods: {
     removeCustomer(index) {
       if(confirm('Really delete customer ' 
         + this.customers[index].firstName + ' ' 
         + this.customers[index].lastName + '?')) {
-        this.customers.splice(index, 1);
+        // this.customers.splice(index, 1);
+        this.$store.dispatch('customers/removeCustomer', index);
       }
     },
   },
   components: {
     AppInsertCustomer
-  }
+  },
 }
 </script>

@@ -13,7 +13,15 @@
 </template>
 
 <script>
-export default {
+// import ProductService from './services/ProductService';
+// import CustomerService from './services/CustomerService';
 
+export default {
+  data() {
+    return {
+      // products: (new ProductService).products,
+      // customers: (new CustomerService()).customers
+    }
+  }
 }
 </script>
