@@ -18,6 +18,7 @@
           <th scope="col">id</th>
           <th scope="col">Title</th>
           <th scope="col">Quantity</th>
+          <th scope="col" colspan="2" style="text-align:center">Stock</th>
         </tr>
       </thead>
       <tbody v-if="filterText === ''">
@@ -25,8 +26,11 @@
           <td>{{ product.id }}</td>
           <td>{{ product.title }}</td>
           <td>{{ product.quantity }}</td>
-          <td><button class="btn btn-outline-primary" @click="increment(product.id)">+</button></td>
-          <td><button class="btn btn-outline-danger" @click="decrement(product.id)">-</button></td>
+          <td style="text-align: center"><button class="btn btn-outline-primary" @click="increment(product.id)">+</button></td>
+          <td style="text-align: center"><button class="btn btn-outline-danger" @click="decrement(product.id)">-</button></td>
+          <router-link :to="`/products/${product.id}`" name="buy" tag="td" style="text-align: center">
+            <button class="btn btn-primary">Buy</button>
+          </router-link>
         </tr>
       </tbody>
       <tbody v-else>
@@ -34,8 +38,11 @@
           <td>{{ product.id }}</td>
           <td>{{ product.title }}</td>
           <td>{{ product.quantity }}</td>
-          <td><button class="btn btn-outline-primary" @click="increment(product.id)">+</button></td>
-          <td><button class="btn btn-outline-danger" @click="decrement(product.id)">-</button></td>
+          <td style="text-align: center"><button class="btn btn-outline-primary" @click="increment(product.id)">+</button></td>
+          <td style="text-align: center"><button class="btn btn-outline-danger" @click="decrement(product.id)">-</button></td>
+          <router-link :to="`/products/${product.id}`" name="buy" tag="td" style="text-align: center">
+            <button class="btn btn-primary">Buy</button>
+          </router-link>
         </tr>
       </tbody>
     </table>

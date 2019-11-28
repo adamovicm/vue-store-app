@@ -1,12 +1,16 @@
 <template>
   <div>
     <h2>Latest purchases from: </h2>
-    <h3>{{customer.firstName}} {{customer.lastName}}</h3>
-    <h4>Customer id: {{customer.id}}</h4>
-    <h4>Email: {{customer.email}}</h4>
+    <h3>{{customers[customerIndex].firstName}} {{customers[customerIndex].lastName}}</h3>
+    <h4>Customer id: {{customers[customerIndex].id}}</h4>
+    <h4>Email: {{customers[customerIndex].email}}</h4>
     <br>
     <ul class="list-group">
-      <li class="list-group-item" v-for="(product, index) in customer.purchases" :key="index">{{ product }}</li>
+      <li 
+        class="list-group-item" 
+        v-for="(productIndex, index) in customers[customerIndex].purchases" 
+        :key="index"
+      >{{ products[productIndex].title }}</li>
     </ul>
     <hr>
     <br>
@@ -15,16 +19,25 @@
 </template>
 
 <script>
-import CustomerService from '../services/CustomerService.js';
+import {mapGetters} from 'vuex';
+// import CustomerService from '../services/CustomerService.js';
 export default {
   data() {
     return {
-      customers: (new CustomerService).customers,
+      customerIndex: 0,
       customer: {}
     }
   },
+  computed: {
+    ...mapGetters({
+      products: 'products/products',
+      customers: 'customers/customers'
+    })
+  },
   created() {
-    this.customer = (new CustomerService).findCustomer(this.$route.params.id);
+    this.customerIndex = this.$route.params.id;
+    // console.log(this.$route.params.id)
+    // this.customer = (new CustomerService).findCustomer(this.$route.params.id);
   }
 }
 </script>

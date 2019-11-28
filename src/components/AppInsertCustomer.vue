@@ -1,36 +1,31 @@
 <template>
   <div>
     <form>
+      <h3>Insert a new customer</h3>
+      <br>
       <div class="form-row">
         <div class="form-group col-md-2">
-          <label for="customerId">id</label>
-          <input type="number" id="customerId" class="form-control" v-model="customer.id">
+          <input type="number" id="id" class="form-control" placeholder="#id" v-model="customer.id">
         </div>
-
         <div class="form-group col-md-3">
-          <label for="firstName">First Name</label>
-          <input type="text" id="firstName" class="form-control" v-model="customer.firstName">
+          <input type="text" id="firstName" class="form-control" placeholder="First Name" v-model="customer.firstName">
         </div>
-
         <div class="form-group col-md-3">
-          <label for="lastName">Last Name</label>
-          <input type="text" id="lastName" class="form-control" v-model="customer.lastName">
+          <input type="text" id="lastName" class="form-control" placeholder="Last Name" v-model="customer.lastName">
         </div>
         <div class="form-group col-md-4">
-          <label for="email">Email</label>
-          <input type="email" id="email" class="form-control" v-model="customer.email">
+          <input type="email" id="email" class="form-control" placeholder="Email" v-model="customer.email">
         </div>
       </div>
       <button class="btn btn-primary" @click.prevent="saveCustomer">Save Customer</button>
     </form>
+    <br>
   </div>
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
 export default {
-  props: [
-    'customers',
-  ],
   data() {
     return {
       customer: {
@@ -45,15 +40,22 @@ export default {
     saveCustomer() {
       let existingCustomer = this.customers.find(customer => customer.id == this.customer.id);
       if(!existingCustomer) {
-        this.customers.push(this.customer);
-        this.customer = {
-          id: '',
-          firstName: '',
-          lastName: '',
-          email: ''
-        };
+        this.$store.dispatch('customers/addCustomer', this.customer);
       }
+
+      this.customer = {
+        id: '',
+        firstName: '',
+        lastName: '',
+        email: ''
+      };
     }
+  },
+  computed: {
+    ...mapGetters({
+      customers: 'customers/customers',
+      // customerIndex: 'customers/customerIndex'
+    })
   }
 }
 </script>

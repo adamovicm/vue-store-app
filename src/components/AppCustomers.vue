@@ -7,7 +7,7 @@
     <table class="table">
       <thead>
         <tr>
-          <th scope="col">id</th>
+          <th scope="col">#id</th>
           <th scope="col">First Name</th>
           <th scope="col">Last Name</th>
           <th scope="col">Email</th>
@@ -41,7 +41,8 @@ import {mapGetters} from 'vuex';
 export default {
   computed: {
     ...mapGetters({
-      customers: 'customers/customers'
+      customers: 'customers/customers',
+      // customerIndex: 'customers/customerIndex'
     }),
   },
   methods: {
