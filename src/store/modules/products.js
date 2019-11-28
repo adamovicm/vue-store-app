@@ -1,29 +1,37 @@
-// import CustomerService from '../../services/CustomerService.js';
+import ProductService from '../../services/ProductService.js';
 
 const state = {
-    customers: []
+    products: (new ProductService()).products
 };
 
 const mutations = {
-    'ADD_CUSTOMER' (state, customer) {
-        state.customers.push(customer);
+    'ADD_STOCK' (state, productId) {
+        state.products.forEach(product => {
+            if(product.id == productId) {
+                product.quantity++;
+            }
+        })
     },
-    'REMOVE_CUSTOMER' (state, index) {
-        state.customers.splice(index, 1);
+    'REDUCE_STOCK' (state, productId) {
+        state.products.forEach(product => {
+            if(product.id == productId && product.quantity > 0) {
+                product.quantity--;
+            }
+        })
     }
 };
 
 const actions = {
-    addCustomer: ({commit}, customer) => {
-        commit('ADD_CUSTOMER', customer);
+    addStock: ({commit}, productId) => {
+        commit('ADD_STOCK', productId);
     },
-    removeCustomer: ({commit}, index) => {
-        commit('REMOVE_CUSTOMER', index);
+    reduceStock: ({commit}, productId) => {
+        commit('REDUCE_STOCK', productId);
     }
 };
 
 const getters = {
-    customers: state => state.customers
+    products: state => state.products
 };
 
 export default {

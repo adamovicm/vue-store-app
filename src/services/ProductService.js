@@ -41,6 +41,4 @@ export default class ProductService {
             quantity: 7
         },
     ];
-
-    
 }

@@ -43,12 +43,16 @@
 </template>
 
 <script>
-import ProductService from '../services/ProductService';
+import {mapGetters} from 'vuex';
+
 export default {
-  // props: ['products'],
+  computed: {
+    ...mapGetters({
+      products: 'products/products'
+    })
+  },
   data() {
     return {
-      products: (new ProductService).products,
       filteredProducts: [],
       filterText: ''
     }
@@ -60,18 +64,10 @@ export default {
             this.filterText.toLowerCase().trim()) !== -1);
     },
     increment(id) {
-      // let foundProductIndex = this.products.find(product => product.id == id);
-      // let index = this.products.indexOf(this.products.filter(product => product.id == id));
-      this.products.forEach(product => {
-        if (product.id == id) {
-          product.quantity ++;
-        }
-      })
-      // console.log(index);
-      // foundProduct.quantity ++;
+      this.$store.dispatch('products/addStock', id);
     },
     decrement(id) {
-      console.log(id);
+      this.$store.dispatch('products/reduceStock', id);
     }
   }
 }

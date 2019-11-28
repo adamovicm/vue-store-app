@@ -2,8 +2,6 @@
   <div>
     <h1>Customers</h1>
     <br>
-    <!-- <router-view name="insert-customer"></router-view> -->
-    <!-- <app-insert-customer /> -->
     <app-insert-customer :customers="customers"/>
     <br>
     <table class="table">
@@ -37,16 +35,10 @@
 </template>
 
 <script>
-// import CustomerService from '../services/CustomerService';
 import AppInsertCustomer from '../components/AppInsertCustomer';
 import {mapGetters} from 'vuex';
 
 export default {
-  data() {
-    return {
-      // customers: (new CustomerService()).customers
-    }
-  },
   computed: {
     ...mapGetters({
       customers: 'customers/customers'
@@ -57,7 +49,6 @@ export default {
       if(confirm('Really delete customer ' 
         + this.customers[index].firstName + ' ' 
         + this.customers[index].lastName + '?')) {
-        // this.customers.splice(index, 1);
         this.$store.dispatch('customers/removeCustomer', index);
       }
     },
